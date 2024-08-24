@@ -1,9 +1,44 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.MusicDelightApplication" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.MusicDelightApplication" parent="Theme.MaterialComponents.DayNight.NoActionBar"/>
+
+    <style name="Theme.MusicDelightApplication" parent="Base.Theme.MusicDelightApplication">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary</item>
+        <item name="colorAccent">@color/color_primary</item>
+    </style>
+    <!-- Popup theme 是用于弹出窗口的主题 -->
+    <style name="AppTheme.Popup" parent="Theme.MusicDelightApplication">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@style/AnimationPopup</item>
+    </style>
+    <!-- AnimationPopup 样式定义了活动（Activity）在打开和关闭时的自定义动画。它指定了活动进入和退出时使用的动画资源 -->
+    <style name="AnimationPopup" mce_bogus="1" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_slide_up</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_slide_down</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_slide_up</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_slide_down</item>
+    </style>
+    <!-- TabLayout 样式定义了 TabLayout 的外观和行为 -->
+    <style name="TabLayout">
+        <item name="tabIndicator">@drawable/ic_tab_layout_indicator</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabPaddingEnd">0dp</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabRippleColor">@null</item>
+    </style>
+    <!-- BottomSheetDialogTheme 样式定义了 BottomSheetDialog 的外观和行为 -->
+    <style name="BottomSheetDialogTheme" parent="Theme.Material3.DayNight.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyleTransparent</item>
+    </style>
+    <!-- BottomSheetStyleTransparent 样式定义了 BottomSheet 的外观和行为 -->
+    <style name="BottomSheetStyleTransparent" parent="Widget.Material3.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.MusicDelightApplication" parent="Base.Theme.MusicDelightApplication" />
+
+    <style name="Theme.DrawerApplication.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.DrawerApplication.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

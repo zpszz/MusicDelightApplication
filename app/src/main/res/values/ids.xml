@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 播放栏，用于在 Activity 中查找 -->
+    <item name="play_bar" type="id" />
+</resources>

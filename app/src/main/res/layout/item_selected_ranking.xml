@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        tools:layout_width="100dp"
+        tools:layout_height="100dp">
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_default_cover"
+            tools:ignore="contentDescription"/>
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:shape_angle="-90"
+            app:shape_endColor="@color/transparent"
+            app:shape_startColor="@color/translucent_black_p50"
+            app:shape_topLeftRadius="6dp"
+            app:shape_topRightRadius="6dp"
+            tools:text="飙升榜" />
+        <com.hjq.shape.view.ShapeTextView
+            android:id="@+id/tv_updateTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingHorizontal="8dp"
+            android:paddingVertical="2dp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/white"
+            android:textSize="11sp"
+            app:shape_angle="-90"
+            app:shape_bottomLeftRadius="6dp"
+            app:shape_bottomRightRadius="6dp"
+            app:shape_endColor="@color/translucent_black_p50"
+            app:shape_startColor="@color/transparent"
+            tools:text="更新时间" />
+        <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="6dp"
+            android:alpha="0.8"
+            android:src="@drawable/ic_play"
+            tools:ignore="contentDescription"/>
+    </FrameLayout>
+</layout>

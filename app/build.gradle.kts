@@ -1,26 +1,47 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("com.google.devtools.ksp") // 使用 KSP 替代 kapt 可以显著提高性能
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
+
+    id("kotlin-parcelize") // parcelize是kotlin的一个插件，用于自动生成Parcelable实现
+    id("kotlin-kapt")
 }
 
 android {
     namespace = "com.jpc.musicdelightapplication"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
         applicationId = "com.jpc.musicdelightapplication"
-        minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = libs.versions.minSdk.get().toInt()
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
 
+        multiDexEnabled = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters.apply {
+                add("armeabi-v7a")
+                add("arm64-v8a")
+            }
+        }
+
+        applicationVariants.all {
+            outputs.all {
+                if (this is com.android.build.gradle.internal.api.ApkVariantOutputImpl) {
+                    this.outputFileName = "musicdelightapplication-$versionName.apk"
+                }
+            }
+        }
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true // 是否混淆代码
+            isShrinkResources = true // 是否移除无用的资源文件
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -28,32 +49,57 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.valueOf(libs.versions.java.get())
+        targetCompatibility = JavaVersion.valueOf(libs.versions.java.get())
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures{
+        dataBinding = true
         viewBinding = true
     }
 }
+ksp {
+    arg("moduleName", project.name)
+    // crouter 默认 scheme
+    arg("defaultScheme", "app")
+    // crouter 默认 host
+    arg("defaultHost", "music")
+    arg("room.schemaLocation", "$projectDir/schemas")
+}
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(project(":lib_base"))
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.swiperefreshlayout)
+    implementation(libs.material)
+    implementation(libs.gson)
+    implementation(libs.androidx.appcompat)
 
     // Room for database
-    implementation ("androidx.room:room-runtime:2.6.1")
-    ksp ("androidx.room:room-compiler:2.6.1")
-    // room针对kotlin协程功能的扩展库
-    implementation("androidx.room:room-ktx:2.6.1")
-    //
+    ksp(libs.room.compiler)
+    implementation(libs.room)
+    // Hilt for dependency injection
+    ksp(libs.hilt.compiler)
+    implementation(libs.hilt)
+
+    // Media3 for music player
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.datasource.okhttp)
+    implementation(libs.media3.session)
+    implementation(libs.media3.ui)
+
+    implementation(libs.retrofit)
+
+    implementation(libs.preference)
+    implementation(libs.flexbox)
+    // 开源库
+    //implementation(libs.lrcview)
+    implementation(libs.banner)
+    implementation(libs.shapeView)
+    implementation(libs.baseRecyclerViewAdapterHelper)
 }

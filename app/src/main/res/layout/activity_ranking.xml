@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.ranking.RankingActivity">
+        <com.jpc.lib_base.widget.TitleLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isShowBack="true"
+            app:titleText="@string/ranking_list"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="18dp"
+            android:textColor="@color/common_text_h1_color"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="官方榜" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_official_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_official_ranking"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="18dp"
+            android:textColor="@color/common_text_h1_color"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="精选榜" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_selected_ranking"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="16dp"
+            tools:itemCount="6"
+            tools:listitem="@layout/item_selected_ranking"/>
+    </LinearLayout>
+</layout>
